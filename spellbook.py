@@ -13,8 +13,8 @@ class SpellBook:
                 html_doc = file.read()
                 self.interpret_html_as_spells(html_doc)
         else:
-            # treat source as raw html
-            pass
+            # Load from the raw string
+            self.interpret_html_as_spells(source)
 
     def interpret_html_as_spells(self, html):
         soup = BeautifulSoup(html, 'html.parser')
