@@ -50,34 +50,3 @@ class Spell:
     def __str__(self):
         return f"'{self.name}': Level {self.level} {self.type} ({' '.join(self.classes)})"
 
-with open("Spell Descriptions - Player’s Handbook - Dungeons & Dragons - Sources - D&D Beyond.html", "rt", errors='replace', encoding='utf8') as file:
-    html_doc = file.read()
-    soup = BeautifulSoup(html_doc, 'html.parser')
-    spell_section = soup.find('div', class_="p-article-content u-typography-format")
-    spells = []
-    for section in spell_section.find_all('h3'):
-        spell = Spell(section)
-        spells.append(spell)
-
-    print (f"{len(spells)} spells in total.")
-
-    classes = set()
-    for spell in spells:
-        for c in spell.classes:
-            classes.add(c)
-
-    for c in classes:
-
-        class_spells = sorted(filter(lambda x : c in x.classes, spells), key=lambda x : x.level)
-        print(f"{c}: {len(class_spells)} spells")
-
-        #for spell in bard_spells:
-        #    if spell.level == 0:
-        #        print(f'{spell.name}: {spell.type} Cantrip')
-        #    else:
-        #        print(f'{spell.name}: Level {spell.level} {spell.type}')
-
-
-
-
-
